@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>添加保存与删除信息</title>
+	</head>
+	<body>
+		<span>姓名：</span>
+		<input type="text" id="name" style="width: 100px;" />
+		<span>年龄：</span>
+		<input type="text" id="age" style="width: 80px;" />
+		<span>性别：</span>
+		<input type="text" id="sex" style="width: 80px;" />
+		<button id="save" onclick="myFunction()">保存</button>
+		<br />
+		<br />
+		<table border="1" cellspacing="0" width="500px" style="text-align: center;" id="list">
+			<tr>
+				<th>姓名</th>
+				<th>年龄</th>
+				<th>性别</th>
+				<th>操作</th>
+			</tr>
+		</table>
+		<script type="text/javascript">
+			//获得姓名标签，与下面的方法可以互换
+			var name_node = document.querySelector("#name");
+			//获得年龄标签，与上面的方法可以互换
+			var age_node = document.getElementById("age");
+//			//获得按钮标签
+//			var save_btn = document.getElementById("save");
+			//获得性别标签
+			var sex_node = document.getElementById("sex")
+			//获得表格标签
+			var table_node = document.getElementById("list");
+//			//为点击设置函数
+//			save_btn.onclick = function(){
+			//开始执行表格的函数
+			function myFunction(){
+				//获得输入框里的内容
+				var name = name_node.value;
+				var age = age_node.value;
+				var sex = sex_node.value;
+				//创建表格里面的行
+				var tr_node = document.createElement("tr");
+				//创建表格里面的列
+				for(i = 0; i < 4; i++){
+					var td_node = document.createElement("td")
+					//如果索引为0，则为姓名；如果索引为1，则为学号
+					if(i == 0){
+						td_node.innerText = name;
+					}else if(i == 1){
+						td_node.innerText = age;
+					}else if(i == 2){
+						td_node.innerText = sex;
+					}else{
+						var btn = document.createElement("input");
+						btn.type = "button";
+						btn.value = "删除";
+						td_node.appendChild(btn)
+						btn.onclick = function(){
+							var tr_list = document.getElementById("list")
+							tr_list.removeChild(td_node.parentNode)
+						}
+					}
+					//把列元素添加到行元素节点
+					tr_node.appendChild(td_node)
+				}
+				//把完整的一行元素添加到表格节点
+				table_node.appendChild(tr_node)
+			}
+		</script>
+	</body>
+</html>
